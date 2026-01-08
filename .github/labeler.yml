@@ -1,0 +1,75 @@
+# Auto-label PRs based on changed files
+
+# ========================================
+# Change Type Labels (for release notes)
+# ========================================
+
+# Features - detect from branch or PR title
+feature:
+  - head-branch: ['^feature/', '^feat/']
+  - title: ['^(\[FEATURE\]|\[feat\]|feat:|feature:)', '^✨']
+
+# Bug Fixes
+bug:
+  - head-branch: ['^(bug|fix|hotfix)/']
+  - title: ['^(\[BUG\]|\[FIX\]|fix:|bug:)', '^🐛']
+
+# Refactoring
+refactor:
+  - head-branch: ['^refactor/']
+  - title: ['^(\[REFACTOR\]|refactor:)', '^♻️', '^🔨']
+
+# Documentation
+docs:
+  - head-branch: ['^docs/']
+  - title: ['^(\[DOCS\]|docs:)', '^📝']
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/*.md'
+      - 'docs/**/*'
+
+# Dependencies/Upgrades
+dependencies:
+  - head-branch: ['^(deps|dependencies|upgrade)/']
+  - title: ['^(\[DEPS\]|\[DEPENDENCIES\]|deps:|chore\(deps\):)', '^⬆️']
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/pyproject.toml'
+      - '**/requirements*.txt'
+      - 'uv.lock'
+
+# Internal/Chores
+internal:
+  - head-branch: ['^(chore|internal)/']
+  - title: ['^(\[CHORE\]|\[INTERNAL\]|chore:|internal:)', '^🔧']
+
+# Security
+security:
+  - head-branch: ['^security/']
+  - title: ['^(\[SECURITY\]|security:)', '^🔒']
+
+# Breaking Changes
+breaking:
+  - title: ['^(\[BREAKING\]|BREAKING CHANGE:|breaking:)', '^💥']
+
+# GitHub Actions
+github-actions:
+  - head-branch: ['^(ci|github-actions)/']
+  - title: ['^(\[CI\]|ci:)']
+
+# ========================================
+# Component Labels (technical)
+# ========================================
+
+# GitHub Workflows (CI/CD component)
+workflows:
+  - changed-files:
+    - any-glob-to-any-file: '.github/**/*'
+
+# Tests
+tests:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '**/tests/**/*'
+      - '**/*_test.py'
+      - '**/test_*.py'
