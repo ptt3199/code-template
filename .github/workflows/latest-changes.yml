@@ -39,7 +39,7 @@ jobs:
         with:
           limit-access-to-actor: true
       
-      - uses: tiangolo/latest-changes@0.6.1
+      - uses: tiangolo/latest-changes@0.7.2
         with:
           token: ${{ secrets.GH_PAT }}
           latest_changes_file: release-notes.md
